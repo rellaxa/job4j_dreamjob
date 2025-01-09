@@ -1,7 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:insert="~{fragments/header :: header}"></head>
+<head>
+    <title>Вакансии</title>
+    <div th:replace="~{fragments/header :: header}"></div>
+</head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Dream Job</a>
+        <div class="collapse navbar-collapse">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/">Главная</a>
+                <a class="nav-item nav-link active" th:href="@{/vacancies}">Вакансии</a>
+                <a class="nav-item nav-link" th:href="@{/candidates}">Кандидаты</a>
+                <a class="nav-item nav-link" th:href="@{/vacancies/create}">Создать вакансию</a>
+            </div>
+        </div>
+    </div>
+</nav>
 <div class="container">
     <div class="row">
         <table class="table">
@@ -9,7 +25,6 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Имя</th>
-                <th scope="col">Описание</th>
                 <th scope="col">Дата создания</th>
             </tr>
             </thead>
@@ -17,7 +32,6 @@
             <tr th:each="vacancy: ${vacancies}">
                 <td th:text="${vacancy.id}" />
                 <td th:text="${vacancy.title}" />
-                <td th:text="${vacancy.description}" />
                 <td th:text="${{vacancy.creationDate}}" />
             </tr>
             </tbody>

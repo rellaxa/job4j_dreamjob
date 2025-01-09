@@ -11,11 +11,16 @@ import ru.job4j.dreamjob.repository.VacancyRepository;
 @RequestMapping("/vacancies") /* Работать с кандидатами будем по URI /vacancies/** */
 public class VacancyController {
 
-    private final VacancyRepository vacancyRepository = MemoryVacancyRepository.getInstance();
+    private final VacancyRepository vacancyRepo = MemoryVacancyRepository.getInstance();
 
     @GetMapping
     public String getAll(Model model) {
-        model.addAttribute("vacancies", vacancyRepository.findAll());
+        model.addAttribute("vacancies", vacancyRepo.findAll());
         return "vacancies/list";
+    }
+
+    @GetMapping("/create")
+    public String getCreationPage() {
+        return "vacancies/create";
     }
 }
