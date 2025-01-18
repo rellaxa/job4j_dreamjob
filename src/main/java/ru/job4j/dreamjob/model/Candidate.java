@@ -11,7 +11,10 @@ public class Candidate {
 
     private String description;
 
-    private LocalDateTime creationDate;
+    private LocalDateTime creationDate = LocalDateTime.now();
+
+    public Candidate() {
+    }
 
     public Candidate(int id, String name, String description, LocalDateTime creationDate) {
         this.id = id;
@@ -68,4 +71,5 @@ public class Candidate {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
 }
