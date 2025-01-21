@@ -1,17 +1,22 @@
 package ru.job4j.dreamjob.repository;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Vacancy;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
+@ThreadSafe
 public class MemoryVacancyRepository implements VacancyRepository {
 
-    private final Map<Integer, Vacancy> vacancies = new HashMap<>();
+    private final ConcurrentMap<Integer, Vacancy> vacancies = new ConcurrentHashMap<>();
 
-    private int nextId = 1;
+    private final AtomicInteger nextId = new AtomicInteger(1);
 
     public MemoryVacancyRepository() {
         save(new Vacancy(0, "Intern Java Developer", "Intern vacancy", LocalDateTime.now()));
@@ -24,7 +29,7 @@ public class MemoryVacancyRepository implements VacancyRepository {
 
     @Override
     public Vacancy save(Vacancy vacancy) {
-        vacancy.setId(nextId++);
+        vacancy.setId(nextId.getAndIncrement());
         vacancies.put(vacancy.getId(), vacancy);
         return vacancy;
     }
