@@ -9,23 +9,17 @@ import java.util.*;
 @Repository
 public class MemoryVacancyRepository implements VacancyRepository {
 
-    private static final MemoryVacancyRepository INSTANCE = new MemoryVacancyRepository();
-
     private final Map<Integer, Vacancy> vacancies = new HashMap<>();
 
     private int nextId = 1;
 
-    private MemoryVacancyRepository() {
+    public MemoryVacancyRepository() {
         save(new Vacancy(0, "Intern Java Developer", "Intern vacancy", LocalDateTime.now()));
         save(new Vacancy(0, "Junior Java Developer", "Junior vacancy", LocalDateTime.now()));
         save(new Vacancy(0, "Junior+ Java Developer", "Upper Junior vacancy", LocalDateTime.now()));
         save(new Vacancy(0, "Middle Java Developer", "Middle vacancy", LocalDateTime.now()));
         save(new Vacancy(0, "Middle+ Java Developer", "Upper Middle vacancy", LocalDateTime.now()));
         save(new Vacancy(0, "Senior Java Developer", "Senior vacancy", LocalDateTime.now()));
-    }
-
-    public static MemoryVacancyRepository getInstance() {
-        return INSTANCE;
     }
 
     @Override

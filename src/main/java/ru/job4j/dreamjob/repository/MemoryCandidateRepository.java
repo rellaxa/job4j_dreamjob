@@ -9,22 +9,16 @@ import java.util.*;
 @Repository
 public class MemoryCandidateRepository implements CandidateRepository {
 
-    private static final MemoryCandidateRepository INSTANCE = new MemoryCandidateRepository();
-
     private final Map<Integer, Candidate> candidates = new HashMap<>();
 
     private int nextId = 1;
 
-    private MemoryCandidateRepository() {
+    public MemoryCandidateRepository() {
         save(new Candidate(0, "Candidate 1", "Claim to be Junior", LocalDateTime.now()));
         save(new Candidate(0, "Candidate 2", "Claim to be Junior+", LocalDateTime.now()));
         save(new Candidate(0, "Candidate 3", "Claim to be Middle", LocalDateTime.now()));
         save(new Candidate(0, "Candidate 4", "Claim to be Middle+", LocalDateTime.now()));
         save(new Candidate(0, "Candidate 5", "Claim to be Senior", LocalDateTime.now()));
-    }
-
-    public static MemoryCandidateRepository getInstance() {
-        return INSTANCE;
     }
 
     @Override
