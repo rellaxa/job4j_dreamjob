@@ -19,11 +19,11 @@ public class MemoryCandidateRepository implements CandidateRepository {
     private final AtomicInteger nextId = new AtomicInteger(1);
 
     public MemoryCandidateRepository() {
-        save(new Candidate(0, "Candidate 1", "Claim to be Junior", LocalDateTime.now(), 1));
-        save(new Candidate(0, "Candidate 2", "Claim to be Junior+", LocalDateTime.now(), 2));
-        save(new Candidate(0, "Candidate 3", "Claim to be Middle", LocalDateTime.now(), 3));
-        save(new Candidate(0, "Candidate 4", "Claim to be Middle+", LocalDateTime.now(), 1));
-        save(new Candidate(0, "Candidate 5", "Claim to be Senior", LocalDateTime.now(), 2));
+        save(new Candidate(0, "Candidate 1", "Claim to be Junior", LocalDateTime.now(), 1, 0));
+        save(new Candidate(0, "Candidate 2", "Claim to be Junior+", LocalDateTime.now(), 2, 0));
+        save(new Candidate(0, "Candidate 3", "Claim to be Middle", LocalDateTime.now(), 3, 0));
+        save(new Candidate(0, "Candidate 4", "Claim to be Middle+", LocalDateTime.now(), 1, 0));
+        save(new Candidate(0, "Candidate 5", "Claim to be Senior", LocalDateTime.now(), 2, 0));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class MemoryCandidateRepository implements CandidateRepository {
     public boolean update(Candidate candidate) {
         return candidates.computeIfPresent(candidate.getId(),
                 (id, oldCandidate) -> new Candidate(oldCandidate.getId(), candidate.getName(),
-                        candidate.getDescription(), candidate.getCreationDate(), candidate.getCityId())) != null;
+                        candidate.getDescription(), candidate.getCreationDate(), candidate.getCityId(), candidate.getFileId())) != null;
     }
 
     @Override
