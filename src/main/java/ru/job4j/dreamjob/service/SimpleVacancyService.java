@@ -17,8 +17,8 @@ public class SimpleVacancyService implements VacancyService {
 
     private final FileService fileService;
 
-    public SimpleVacancyService(VacancyRepository vacancyRepository, FileService fileService) {
-        this.vacancyRepository = vacancyRepository;
+    public SimpleVacancyService(VacancyRepository sql2oVacancyRepository, FileService fileService) {
+        this.vacancyRepository = sql2oVacancyRepository;
         this.fileService = fileService;
     }
 
@@ -39,8 +39,9 @@ public class SimpleVacancyService implements VacancyService {
         if (vacancyOptional.isEmpty()) {
             return false;
         }
+        var isDeleted = vacancyRepository.deleteById(id);
         fileService.deleteById(vacancyOptional.get().getFileId());
-        return vacancyRepository.deleteById(id);
+        return isDeleted;
     }
 
     @Override
