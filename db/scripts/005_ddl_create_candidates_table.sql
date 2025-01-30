@@ -7,5 +7,3 @@ create table candidates
     city_id       int references cities(id),
     file_id       int references files(id)
 );
-
-delete from files
