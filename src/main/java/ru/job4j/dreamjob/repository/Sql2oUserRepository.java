@@ -33,7 +33,7 @@ public class Sql2oUserRepository implements UserRepository {
             user.setId(generatedId);
             return Optional.of(user);
         } catch (Sql2oException exception) {
-            LOG.error(String.format("email: %s уже существует", user.getEmail()));
+            LOG.error("email: {} уже существует", user.getEmail());
         }
         return Optional.empty();
     }
